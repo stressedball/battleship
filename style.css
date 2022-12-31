@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    margin: 0;
+}
+.boards-container {
+    display: flex;
+    gap: 2rem;
+}
+.board {
+    display: grid;
+    background-color: black;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    row-gap: 1px;
+    column-gap: 1px;
+    border: 3px solid white;
+}   
+.square {
+    background-color: hsl(210, 93%, 52%);
+}
+.square.hit {
+    background-color: hsl(0, 44%, 46%);
+}
+.square.miss {
+    background-color: hsla(219, 58%, 40%, 0.719);
+}
+.square.ship {
+    background-color: hsl(204, 49%, 33%);
+}
+.square.ship.hit {
+    background-color: hsl(0, 44%, 46%);
+}
+body {
+    height: 100vh;
+    background-color: hsl(210, 93%, 52%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+    color: white;
+}
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+}
+#content.horizontal {
+    flex-direction: row ;
+}
+footer {
+    font-weight: bold;
+    padding: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1 {
+    padding: 3rem;
+    font-size: 3rem;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.hor, .ver {
+    font-size: 1.1rem;
+    /* font-weight: bold; */
+    animation: color-fade 1500ms forwards;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+@keyframes color-fade {
+    0% {
+        color : black
+    }    
+    50% {
+        color : hsl(198, 13%, 64%)
+    }
+    100% {
+        color: black;
+    }
+}
+.label {
+    font-size: 1.5rem;
+}
+.message-help {
+    /* border : 1px solid black; */
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    font-family: 'Barlow', sans-serif;
+    text-align: center  ;
+    font-weight: 600;
+}
+.message {
+    font-size: 2rem;
+    border: 1px solid;
+    padding: 3rem;
+    border-radius: 1rem;
+}
+.new-game {
+    font-weight: bold;
+    height: 200px;
+    width: 300px;
+    border-radius: 50px;
+    background-color: hsl(236deg 35% 21% / 61%);
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    box-shadow: 0 1px white;
+}
+.new-game:hover {
+    background-color: hsl(197, 31%, 38%);
+}
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    font-family: 'Barlow';
+}
+.rotate-help {
+    font-family: 'Barlow', sans-serif;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    /* align-items: center; */
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.rotate-help button {
+    border: none;
+    background: none;
+    color: white;
+    filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(214deg) brightness(108%) contrast(105%);
+}
+.square {
+    height: 30px;
+    width: 30px;
+}
+.score {
+    font-size: 1.2rem;
+    font-family: 'Barlow', sans-serif;
+}
+.incorrect {
+    background-color: hsl(0, 100%, 68%);
+}  
+.correct {
+    /* background-color : hsl(124, 60%, 48%) */
+    background-color: hsl(202, 100%, 64%);
+} 
+.board.attack.hoverable .square:hover {
+    background-color: hsl(210, 65%, 68%);
+}
