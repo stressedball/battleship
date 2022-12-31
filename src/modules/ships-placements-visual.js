@@ -13,22 +13,15 @@ function shipPlacementVisual(event) {
     if (rotationHandle === 'hor') {
         let positionedShips = document.querySelectorAll(`.board.defense .square.ship[data-coords ^= "${xCur}"`);
         if (positionedShips.length > 0) { // if there are ships placed at the current mouse event
-            let arr = [];                                               // we get all the coordinates
-            for (let i = 0; i < positionedShips.length; i++) {          //
-                let coords = positionedShips[i].dataset.coords;         //
-                let y = Number(coords.charAt(coords.length - 1));       //
-                arr.push(y);                                            //
-            }                                                           //
-            let yMax = -1;                                              // we then take both max and min populated values
-            let yMin = 100;                                             //
-            for (let i = 0; i < arr.length; i++) {                      //
-                let y = arr[i];                                         // catch those values here
-                if (y > yMax) yMax = y;                                 //
-                if (y < yMin) yMin = y;                                 //  
-            }                                                           //
-            if ((yCur - shipSize < yMin) && (yMin <= yCur) ||
-                ((yCur - shipSize < yMax) && (yMax <= yCur))) {               // if current coordinates are between min populated and (current coords + needed space)
-                for (let i = 0; i < shipSize; i++) {                    //
+            let arr = [];                                               
+            for (let i = 0; i < positionedShips.length; i++) {          
+                let coords = positionedShips[i].dataset.coords;  
+                let x = Number(coords.charAt(0));
+                let y = Number(coords.charAt(coords.length - 1));       
+                arr.push([x, y]);                                            
+            }                                                           
+            if (arr.filter(el => xCur === el[0] && yCur - shipSize <= el[1] && el[1] <= yCur).length > 0) {
+                for (let i = 0; i < shipSize; i++) {
                     document.querySelector(`.board.defense .square[data-coords = "${xCur},${yCur - i}"]`).classList.add('incorrect');
                 }
                 return;
@@ -51,17 +44,10 @@ function shipPlacementVisual(event) {
             for (let i = 0; i < positionedShips.length; i++) {
                 let coords = positionedShips[i].dataset.coords;
                 let x = Number(coords.charAt(0));
-                arr.push(x);
+                let y = Number(coords.charAt(coords.length - 1));
+                arr.push([x, y]);
             }
-            let xMax = -1;
-            let xMin = 100;
-            for (let i = 0; i < arr.length; i++) {
-                let x = arr[i];
-                if (x > xMax) xMax = x;
-                if (x < xMin) xMin = x;
-            }
-            if (((xCur - shipSize < xMin) && (xMin <= xCur)) ||
-                ((xCur - shipSize < xMax) && (xMax <= xCur))) {
+            if (arr.filter(el => xCur - shipSize < el[0] && el[0] <= xCur && yCur === el[1]).length > 0) {
                 for (let i = 0; i < shipSize; i++) {
                     document.querySelector(`.board.defense .square[data-coords = "${xCur - i},${yCur}"]`).classList.add('incorrect');
                 }
